@@ -1,59 +1,114 @@
 package com.example.lifecyclelog;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.*;
+import android.view.Menu;
 
 import static com.example.lifecyclelog.Util.LifecycleState.CALL_TO_SUPER;
 import static com.example.lifecyclelog.Util.LifecycleState.RETURN_FROM_SUPER;
 import static com.example.lifecyclelog.Util.recLifeCycle;
 
-@TargetApi(Build.VERSION_CODES.KITKAT)
-public class TestFragment extends Fragment {
+/**
+ * A standard Android Activity.
+ */
+public class BActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onCreate(savedInstanceState);
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+        setContentView(R.layout.activity_b);
+
+        FragmentManager.enableDebugLogging(true);
+        LoaderManager.enableDebugLogging(true);
+    }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    protected void onRestart() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onActivityCreated(savedInstanceState);
+        super.onRestart();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public View
-    onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    protected void onStart() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        View v = inflater.inflate(R.layout.fragment_test, container, false);
+        super.onStart();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
-        return v;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    protected void onResume() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onViewCreated(view, savedInstanceState);
+        super.onResume();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
-
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onPause() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onPause();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
-
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    protected void onStop() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onAttach(activity);
+        super.onStop();
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onDestroy() {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onDestroy();
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onRestoreInstanceState(savedInstanceState);
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onPostCreate(savedInstanceState);
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onPostResume() {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onPostResume();
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onNewIntent(intent);
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onSaveInstanceState(outState);
+        recLifeCycle(getClass(), RETURN_FROM_SUPER);
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        recLifeCycle(getClass(), CALL_TO_SUPER);
+        super.onUserLeaveHint();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
@@ -65,102 +120,69 @@ public class TestFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onAttachFragment(Fragment fragment) {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onCreate(savedInstanceState);
-        recLifeCycle(getClass(), RETURN_FROM_SUPER);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
-        recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onCreateOptionsMenu(menu, inflater);
+        super.onAttachFragment(fragment);
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public void onDestroy() {
+    public void onUserInteraction() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onDestroy();
+        super.onUserInteraction();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public void onDestroyOptionsMenu() {
+    public void onContentChanged() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onDestroyOptionsMenu();
+        super.onContentChanged();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public void onDestroyView() {
+    public void onWindowFocusChanged(boolean hasFocus) {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onDestroyView();
+        super.onWindowFocusChanged(hasFocus);
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public void onDetach() {
+    public void onAttachedToWindow() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onDetach();
+        super.onAttachedToWindow();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
+    public void onDetachedFromWindow() {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onInflate(activity, attrs, savedInstanceState);
+        super.onDetachedFromWindow();
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 
     @Override
-    public void onPause() {
+    public boolean onCreateOptionsMenu(Menu menu) {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onPause();
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
+        return true;
     }
 
     @Override
-    public void onPrepareOptionsMenu(final Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onPrepareOptionsMenu(menu);
+        boolean result = super.onPrepareOptionsMenu(menu);
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
+
+        return result;
     }
 
     @Override
-    public void onResume() {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onResume();
-        recLifeCycle(getClass(), RETURN_FROM_SUPER);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onSaveInstanceState(outState);
-        recLifeCycle(getClass(), RETURN_FROM_SUPER);
-    }
-
-    @Override
-    public void onStart() {
-        recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onStart();
-        recLifeCycle(getClass(), RETURN_FROM_SUPER);
-    }
-
-    @Override
-    public void onStop() {
-        recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onStop();
-
-        recLifeCycle(getClass(), RETURN_FROM_SUPER);
-    }
-
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        recLifeCycle(getClass(), CALL_TO_SUPER);
-        super.onViewStateRestored(savedInstanceState);
+        super.onActivityResult(requestCode, resultCode, data);
         recLifeCycle(getClass(), RETURN_FROM_SUPER);
     }
 }
